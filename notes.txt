@@ -1,0 +1,68 @@
+Identifying Duplos
+----------------------
+
+
+
+Assumptions / Requirements
+----------------------
+1) no other interaction with the block other than by this robot
+2) sensor source must not move (i.e., kinect sensor - this is because no transformations will be implemented)
+3) there are no other objects in the scene except for blocks and a plain backdrop
+
+
+
+
+
+Algorithm Overview
+----------------------
+1) take 2d image and 3d image from kinect
+2) use blob detection (contiguous groups of colors) [blocks have color]
+3) apply 3d information on blobs -> will hopefully break up groups of blocks into individual blocks
+4) use 2d or 3d information to find all edges on each block -> find 3 primary edges, find length, find volume [blocks have shapes or are of undefined shape]
+4b) OR apply known shapes (largest to smallest) to try removing blocks from block groups
+5) use volume information to determine [position and orientation] of block center
+6) blobs are given a probability based on a sensor model for color and, primary shape information
+7) probabilities are carried over to the next image
+
+-> use occlusion (blocks in front of other blocks) and table surface to infer full volume
+-> remaining undefined blobs can be disturbed by robot hand to hopefully gain more information -> start from scratch on the filter (could retain information in non-disturbed areas…)
+-> could also search for top area instead of full volume
+-> use occlusion with PR2 hand, don't try and detect blocks when hand is covering more than 80% of the block (still show outline of blocks when hand is in the way… cool!)
+
+Algorithm Pseudo Code
+----------------------
+cloud = get cloud
+blobs = get blobs (on hue)
+filter blobs that aren't lego colors
+foreach blob
+	shapeProbabilities [sizeof shapes]
+	foreach shape
+		try and fit shape to blob
+		assign probability for each shape
+	if probability has converged, assign shape to blob
+	else blob is unknown
+return blobs
+
+
+DuploBlock
+----------------------
+DuploShape - detected via a mean volume and range
+DuploColor - detected via a mean and range
+Position
+Orientation
+
+
+
+TODO LIST
+read in pcd file
+get a point cloud with depth and color
+create messages
+
+
+
+
+
+Build Duplo Block (duplo_builder stack)
+duplo_planner (takes goal block set, current state, issues next move until complete)
+place_duplo (grab block at the center of the attaching region)
+identify_duplos

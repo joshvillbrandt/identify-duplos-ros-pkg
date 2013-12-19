@@ -1,0 +1,20 @@
+<package>
+  <description brief="identify_duplos">
+
+     identify_duplos
+
+  </description>
+  <author>Josh</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/identify_duplos</url>
+  <depend package="ogre"/>
+  <depend package="pcl"/>
+  <depend package="pcl_ros"/>
+  <depend package="roscpp"/>
+  <depend package="sensor_msgs"/>
+  <depend package="visualization_msgs"/>
+
+</package>
+
+

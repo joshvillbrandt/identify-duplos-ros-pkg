@@ -1,0 +1,13 @@
+COLORS
+#format is: R_mean R_sigma G_mean G_sigma B_mean B_sigma
+red 130 44 35 40 30 35
+#orange
+yellow 180 50 160 85 80 75
+green 60 50 110 75 45 65
+blue 70 35 80 45 130 75
+
+SHAPES
+2x2 data/2x2.pcd
+2x4 data/2x4.pcd
+2x6 data/2x6.pcd
+2x8 data/2x8.pcd
