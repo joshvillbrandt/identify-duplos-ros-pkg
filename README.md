@@ -16,7 +16,7 @@ This program attempts to identify LEGO Duplo blocks on a table on send out ident
 See final report PDF.
 
 ## Installation / Usage Preparation
-    svn co http://svn.javconcepts.com/cs547/trunk/identify_duplos
+    git clone https://github.com/joshvillbrandt/identify-duplos-ros-pkg.git identify_duplos
     make eclipse-project
     rosmake identify_duplos
     roscore
